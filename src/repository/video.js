@@ -1,4 +1,6 @@
 const { videoModel } = require("../models");
+const mongoose = require("mongoose");
+const pkg = require("../../src/pkg");
 
 // post
 const createVideo = async (data) => {
@@ -23,9 +25,18 @@ const getAllVideo = async () => {
 // get by id
 const getVideoById = async (id) => {
   try {
-    return await videoModel.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.log("repo getVideoById: Invalid video ID.");
+      throw new pkg.CustomError("Invalid video_id", 400);
+    }
+    const video = await videoModel.findById(id);
+    if (!video){
+      console.log("repo getVideoById: video not found");
+      throw new pkg.CustomError("video not found", 404);
+    }
+    return video
   } catch (error) {
-    throw new Error("repo : Failed to get video by id");
+    throw error
   }
 };
 

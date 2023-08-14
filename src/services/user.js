@@ -49,18 +49,18 @@ const loginUser = async (email, password) => {
 
 const uploadImage = async (filename, path) => {
   try {
-    // const storage = multer.diskStorage({
-    //   destination: function (req, file, cb) {
-    //     cb(null, "uploads/");
-    //   },
-    //   filename: function (req, file, cb) {
-    //     const extname = path.extname(file.originalname);
-    //     cb(null, file.fieldname + "-" + Date.now() + extname);
-    //   },
-    // });
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, "uploads/");
+      },
+      filename: function (req, file, cb) {
+        const extname = path.extname(file.originalname);
+        cb(null, file.fieldname + "-" + Date.now() + extname);
+      },
+    });
 
-    // // Initialize multer upload
-    // const upload = multer({ storage });
+    // Initialize multer upload
+    const upload = multer({ storage });
 
     const imageData = { filename, path };
     return await Repo.userRepo.uploadImage(imageData);

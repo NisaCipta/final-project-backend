@@ -44,8 +44,11 @@ const loginUser = async (req, res) => {
 };
 
 const uploadImage = async (req, res) => {
-  await service.userService.uploadImage()
-
+  try {
+  } catch (error) {
+    pkg.Responder.responseError(res, error);
+  }
+  await service.userService.uploadImage();
 };
 
 // Configure multer storage
@@ -76,4 +79,5 @@ const uploadImage = async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
+  uploadImage,
 };

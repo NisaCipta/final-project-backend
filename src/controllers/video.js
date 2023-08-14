@@ -3,14 +3,14 @@ const pkg = require("../../src/pkg");
 
 const createVideo = async (req, res) => {
   try {
-    let { url_image_thumbnail, video_url } = req.body;
+    let { title, video_url, thumbnail_video_url } = req.body;
 
     if (video_url == "") {
       throw new pkg.CustomError("video_url is required", 400);
     }
 
-    if (url_image_thumbnail == "") {
-      throw new pkg.CustomError("url_image_tumbnail is required", 400);
+    if (title == "") {
+      throw new pkg.CustomError("title is required", 400);
     }
 
     let newVideo = await service.videoService.createVideo(req.body);
@@ -33,8 +33,8 @@ const getAllVideo = async (req, res) => {
 const getVideoById = async (req, res) => {
   try {
     const id = req.params.id;
-    const dataVideo = await service.videoService.getVideoById(id);
-    pkg.Responder.generateResponse(res, 200, "success get video by id", dataVideo);
+    const video = await service.videoService.getVideoById(id);
+    pkg.Responder.generateResponse(res, 200, "success get video by id", video);
   } catch (error) {
     pkg.Responder.responseError(res, error);
   }

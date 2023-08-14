@@ -4,13 +4,15 @@ const pkg = require("../pkg");
 const createProduct = async (dataProduct) => {
   try {
     const product = dataProduct;
-    let video = await Repo.videoRepo.createProduct(product.video_id);
+    let video = await Repo.videoRepo.getVideoById(product.video_id);
     if (video == null) {
       throw new pkg.CustomError("video is not found", 404);
     }
     return await Repo.productRepo.createProduct(product);
   } catch (error) {
-    throw new Error("service : Failed to create product");
+    if (error.message == '')
+    console.log("service: ",error)
+    throw new error;
   }
 };
 

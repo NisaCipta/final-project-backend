@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const videoSchema = new Schema(
   {
-    url_image_thumbnail: {
+    title: {
       type: String,
       required: true,
     },
@@ -11,6 +11,7 @@ const videoSchema = new Schema(
       type: String,
       required: true,
     },
+    
   },
   {
     versionKey: false,

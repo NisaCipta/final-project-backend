@@ -21,13 +21,13 @@ const getVideoById = async (id) => {
   try {
     return await Repo.videoRepo.getVideoById(id);
   } catch (error) {
-    throw new Error("service : Failed to get video by id");
+    throw error
   }
 };
 
 const combineVideoWithProducts = (video, products) => {
   return {
-    _id: video_id,
+    _id: video._id,
     url_image_thumbnail: video.url_image_thumbnail,
     video_url: video.video_url,
     products: [...products],
@@ -46,7 +46,7 @@ const getVideoWithProducts = async (id) => {
 
     return combineVideoWithProducts(video, products);
   } catch (error) {
-    throw new Error("service : Failed to get video with product");
+    throw error
   }
 };
 const combineVideoWithComments = (video, comments) => {

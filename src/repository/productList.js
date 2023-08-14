@@ -31,9 +31,11 @@ const getProductById = async (id) => {
 
 const getProductByVideoID = async (id) => {
   try {
-    return await productModel.findById({ video_id: id });
+    const products = await productModel.find({ video_id: id });
+
+    return products;
   } catch (error) {
-    throw new Error("Failed to get product by video id");
+    throw error;
   }
 };
 
