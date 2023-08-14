@@ -8,7 +8,6 @@ const jwt = require("jsonwebtoken");
 
 const createUser = async (username, email, password, url_image_profile) => {
   try {
-    const hashPassword = await bcrypt.hash(password, 10);
     //kalau emailnya sudah ada
     const existsEmail = await Repo.userRepo.getUserByEmail({ email });
     if (existsEmail) {
@@ -16,11 +15,13 @@ const createUser = async (username, email, password, url_image_profile) => {
       throw new pkg.CustomError("email sudah terdaftar", 400);
     }
 
+    const hashPassword = await bcrypt.hash(password, 10);
+
     const userData = { username, email, password: hashPassword, url_image_profile };
     return await Repo.userRepo.createUser(userData);
   } catch (error) {
     console.log("service : failed to regis");
-    throw new pkg.CustomError("Failed to regis user", 400);
+    throw new pkg.CustomError("Email is already available, please login", 400);
   }
 };
 
@@ -36,14 +37,14 @@ const loginUser = async (email, password) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       console.log("service : password is not compare");
-      throw new Error("service : Failed to compare password");
+      throw new pkg.CustomError("Wrong Email or Password ", 400);
     }
     //kembalikan token jwt
     const token = jwt.sign({ email }, process.env.JWT_SECRET);
     return token;
   } catch (error) {
-    console.log("service : Email tidak didaftarkan");
-    throw new pkg.CustomError("Email is not registered", 404);
+    console.log("service : Email tidak didaftarkan", error);
+    throw error;
   }
 };
 
