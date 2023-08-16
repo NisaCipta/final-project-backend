@@ -32,9 +32,10 @@ const getCommentById = async (id) => {
 // get comment by video
 const getCommentByVideoId = async (id) => {
   try {
-    return await commentModel.find({ video: id });
+    const comments = await commentModel.find({ video_id: id });
+    return comments;
   } catch (error) {
-    throw new Error("repo : Failed to get comment by video id");
+    throw error;
   }
 };
 

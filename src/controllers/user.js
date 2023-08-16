@@ -34,7 +34,6 @@ const loginUser = async (req, res) => {
     if (password == "") {
       pkg.CustomError("password is required", 400);
     }
-
     const token = await service.userService.loginUser(email, password);
 
     pkg.Responder.generateResponse(res, 200, "success login", token);

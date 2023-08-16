@@ -1,4 +1,5 @@
 const Repo = require("../repository");
+const pkg = require("../pkg");
 
 const createComment = async (dataComment) => {
   try {
@@ -6,13 +7,14 @@ const createComment = async (dataComment) => {
     let video = await Repo.videoRepo.getVideoById(comment.video_id);
 
     if (video == null) {
-      throw new Error("service : Failed to create comment");
+      console.log("service : video not found");
+      throw new pkg.CustomError("video is not found", 404);
     }
 
     const newComment = await Repo.commentRepo.createComment(dataComment);
     return newComment;
   } catch (error) {
-    throw new Error("service : Failed to create comment");
+    throw error;
   }
 };
 
@@ -20,7 +22,8 @@ const getAllComment = async () => {
   try {
     return await Repo.commentRepo.getAllComment();
   } catch (error) {
-    throw new Error("service : Failed to get all comment");
+    console.log("service : comment not found");
+    throw error;
   }
 };
 
@@ -28,7 +31,8 @@ const getCommentById = async (id) => {
   try {
     return await Repo.commentRepo.getCommentById(id);
   } catch (error) {
-    throw new Error("service : Failed to get comment by id");
+    console.log("service : comment by id not found");
+    throw error;
   }
 };
 
@@ -36,7 +40,8 @@ const searchItemsComment = async (query) => {
   try {
     return await Repo.commentRepo.searchItemsComment(query);
   } catch (error) {
-    throw new Error("service : Failed to search product");
+    console.log("service : comment not found");
+    throw error;
   }
 };
 

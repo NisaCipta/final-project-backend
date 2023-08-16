@@ -5,7 +5,8 @@ const createVideo = async (dataVideo) => {
     const video = dataVideo;
     return await Repo.videoRepo.createVideo(video);
   } catch (error) {
-    throw new Error("service : Failed to create video");
+    console.log("service : Failed to create video");
+    throw error;
   }
 };
 
@@ -13,7 +14,8 @@ const getAllVideo = async () => {
   try {
     return await Repo.videoRepo.getAllVideo();
   } catch (error) {
-    throw new Error("service : Failed to get all video");
+    console.log("service : Failed to get all video");
+    throw error;
   }
 };
 
@@ -21,7 +23,8 @@ const getVideoById = async (id) => {
   try {
     return await Repo.videoRepo.getVideoById(id);
   } catch (error) {
-    throw error
+    console.log("service : Failed to get video by id");
+    throw error;
   }
 };
 
@@ -46,12 +49,12 @@ const getVideoWithProducts = async (id) => {
 
     return combineVideoWithProducts(video, products);
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 const combineVideoWithComments = (video, comments) => {
   return {
-    _id: video_id,
+    _id: video._id,
     url_image_thumbnail: video.url_image_thumbnail,
     video_url: video.video_url,
     comments: [...comments],
@@ -60,7 +63,7 @@ const combineVideoWithComments = (video, comments) => {
   };
 };
 
-const getVideoWithComments = async (req, res) => {
+const getVideoWithComments = async (id) => {
   try {
     let video = await Repo.videoRepo.getVideoById(id);
     if (video == null) {
@@ -69,7 +72,7 @@ const getVideoWithComments = async (req, res) => {
     let comments = await Repo.commentRepo.getCommentByVideoId(id);
     return combineVideoWithComments(video, comments);
   } catch (error) {
-    throw new Error("service : Failed to get video with comments");
+    throw error;
   }
 };
 

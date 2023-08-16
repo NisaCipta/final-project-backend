@@ -39,9 +39,11 @@ const loginUser = async (email, password) => {
       console.log("service : password is not compare");
       throw new pkg.CustomError("Wrong Email or Password ", 400);
     }
+
     //kembalikan token jwt
     const token = jwt.sign({ email }, process.env.JWT_SECRET);
-    return token;
+
+    return { token, user };
   } catch (error) {
     console.log("service : Email tidak didaftarkan", error);
     throw error;

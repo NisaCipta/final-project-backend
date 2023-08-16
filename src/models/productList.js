@@ -21,7 +21,7 @@ const productSchema = new Schema(
       type: String,
     },
   },
-  
+
   {
     versionKey: false,
     timeseries: true,

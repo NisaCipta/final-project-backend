@@ -3,7 +3,7 @@ const pkg = require("../../src/pkg");
 
 const createVideo = async (req, res) => {
   try {
-    let { title, video_url, thumbnail_video_url } = req.body;
+    let { title, video_url } = req.body;
 
     if (video_url == "") {
       throw new pkg.CustomError("video_url is required", 400);

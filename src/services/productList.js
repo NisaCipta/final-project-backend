@@ -10,9 +10,8 @@ const createProduct = async (dataProduct) => {
     }
     return await Repo.productRepo.createProduct(product);
   } catch (error) {
-    if (error.message == '')
-    console.log("service: ",error)
-    throw new error;
+    console.log("service : failed to create product", error);
+    throw error;
   }
 };
 
@@ -20,7 +19,8 @@ const getAllProduct = async () => {
   try {
     return await Repo.productRepo.getAllProduct();
   } catch (error) {
-    throw new Error("service : Failed to get all product");
+    console.log("service : Failed to get all product", error);
+    throw error;
   }
 };
 
@@ -28,7 +28,8 @@ const getProductById = async (id) => {
   try {
     return await Repo.productRepo.getProductById(id);
   } catch (error) {
-    throw new Error("service : Failed to get product by id");
+    console.log("service : Failed to get product by id", error);
+    throw error;
   }
 };
 
@@ -36,7 +37,8 @@ const searchItemsProduct = async (query) => {
   try {
     return await Repo.productRepo.searchItemsProduct(query);
   } catch (error) {
-    throw new Error("service : Failed to search product");
+    console.log("service : Failed to search product");
+    throw error;
   }
 };
 
