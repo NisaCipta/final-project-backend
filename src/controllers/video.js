@@ -23,6 +23,13 @@ const createVideo = async (req, res) => {
 
 const getAllVideo = async (req, res) => {
   try {
+    const title = req.query.title;
+    if (title) {
+      const dataVideosByTitle = await service.videoService.getAllVideoByTitle(title);
+      pkg.Responder.generateResponse(res, 200, "success get all video", dataVideosByTitle);
+      return;
+    }
+
     const dataVideos = await service.videoService.getAllVideo();
     pkg.Responder.generateResponse(res, 200, "success get all video", dataVideos);
   } catch (error) {

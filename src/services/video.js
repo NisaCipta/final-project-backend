@@ -19,6 +19,15 @@ const getAllVideo = async () => {
   }
 };
 
+const getAllVideoByTitle = async (title) => {
+  try {
+    return await Repo.videoRepo.getAllVideoByTitle(title);
+  } catch (error) {
+    console.log("service : Failed to get all video by title");
+    throw error;
+  }
+};
+
 const getVideoById = async (id) => {
   try {
     return await Repo.videoRepo.getVideoById(id);
@@ -82,4 +91,5 @@ module.exports = {
   getVideoById,
   getVideoWithProducts,
   getVideoWithComments,
+  getAllVideoByTitle,
 };

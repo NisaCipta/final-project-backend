@@ -8,7 +8,8 @@ const createVideo = async (data) => {
     const saveVideo = await videoModel.create(data);
     return saveVideo;
   } catch (error) {
-    throw new Error("repo : Failed to create video");
+    console.log("repo : Failed to create video");
+    throw error;
   }
 };
 
@@ -18,7 +19,18 @@ const getAllVideo = async () => {
     const videos = await videoModel.find();
     return videos;
   } catch (error) {
-    throw new Error("repo : Failed to get all video");
+    console.log("repo : Failed to get all video");
+    throw error;
+  }
+};
+
+const getAllVideoByTitle = async (title) => {
+  try {
+    const regex = new RegExp(title, "i");
+    return await videoModel.find({ title: regex });
+  } catch (error) {
+    console.log("repo : Failed to get all video by title");
+    throw error;
   }
 };
 
@@ -30,13 +42,13 @@ const getVideoById = async (id) => {
       throw new pkg.CustomError("Invalid video_id", 400);
     }
     const video = await videoModel.findById(id);
-    if (!video){
+    if (!video) {
       console.log("repo getVideoById: video not found");
       throw new pkg.CustomError("video not found", 404);
     }
-    return video
+    return video;
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
@@ -44,4 +56,5 @@ module.exports = {
   createVideo,
   getAllVideo,
   getVideoById,
+  getAllVideoByTitle,
 };
