@@ -6,7 +6,8 @@ const createComment = async (data) => {
     const saveComment = await commentModel.create(data);
     return saveComment;
   } catch (error) {
-    throw new Error("repo : Failed to create comment");
+    console.log("repo : Failed to create comment");
+    throw error;
   }
 };
 
@@ -16,7 +17,8 @@ const getAllComment = async () => {
     const comments = commentModel.find();
     return comments;
   } catch (error) {
-    throw new Error("repo : Failed to get all comment");
+    console.log("repo : Failed to get all comment");
+    throw error;
   }
 };
 
@@ -25,7 +27,8 @@ const getCommentById = async (id) => {
   try {
     return await commentModel.findById(id);
   } catch (error) {
-    throw new Error("repo : Failed to get comment by id");
+    console.log("repo : Failed to get comment by id");
+    throw error;
   }
 };
 
@@ -35,6 +38,7 @@ const getCommentByVideoId = async (id) => {
     const comments = await commentModel.find({ video_id: id });
     return comments;
   } catch (error) {
+    console.log("repo : Failed to get comment by video id");
     throw error;
   }
 };

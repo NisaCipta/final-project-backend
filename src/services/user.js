@@ -16,7 +16,6 @@ const createUser = async (username, email, password, url_image_profile) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-
     const userData = { username, email, password: hashPassword, url_image_profile };
     return await Repo.userRepo.createUser(userData);
   } catch (error) {
@@ -51,6 +50,13 @@ const loginUser = async (email, password) => {
 };
 
 const uploadImage = async (filename, path) => {
+  try {
+    
+  } catch (error) {
+    console.log("service : Failed to upload image");
+    throw error;
+  }
+
   try {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {

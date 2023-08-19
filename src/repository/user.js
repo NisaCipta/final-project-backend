@@ -6,7 +6,8 @@ const createUser = async (data) => {
     const saveUser = await userModel.create(data);
     return saveUser;
   } catch (error) {
-    throw new Error("Failed to create user");
+    console.log("Failed to create user");
+    throw error;
   }
 };
 
@@ -16,7 +17,8 @@ const getUserByEmail = async (email) => {
     const user = await userModel.findOne(email);
     return user;
   } catch (error) {
-    throw new Error("Failed to get user by email");
+    console.log("Failed to get user by email");
+    throw error;
   }
 };
 
@@ -25,7 +27,8 @@ const uploadImage = async (imageData) => {
     const image = await userModel.save(imageData);
     return image;
   } catch (error) {
-    throw new Error("Failed to upload image");
+    console.log("Failed to upload image");
+    throw error;
   }
 };
 

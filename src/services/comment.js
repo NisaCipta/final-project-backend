@@ -14,6 +14,7 @@ const createComment = async (dataComment) => {
     const newComment = await Repo.commentRepo.createComment(dataComment);
     return newComment;
   } catch (error) {
+    console.log("service : failed to create");
     throw error;
   }
 };

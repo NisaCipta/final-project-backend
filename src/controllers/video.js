@@ -33,6 +33,7 @@ const getAllVideo = async (req, res) => {
     const dataVideos = await service.videoService.getAllVideo();
     pkg.Responder.generateResponse(res, 200, "success get all video", dataVideos);
   } catch (error) {
+    console.log(error, 1234);
     pkg.Responder.responseError(res, error);
   }
 };

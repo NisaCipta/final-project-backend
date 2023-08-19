@@ -55,9 +55,11 @@ const getVideoWithProducts = async (id) => {
       throw new Error("service : video not found");
     }
     let products = await Repo.productRepo.getProductByVideoID(id);
-
+    
     return combineVideoWithProducts(video, products);
   } catch (error) {
+    console.log("service : Failed to get video with product");
+    console.log("service : Failed to get video with product");
     throw error;
   }
 };
@@ -81,6 +83,7 @@ const getVideoWithComments = async (id) => {
     let comments = await Repo.commentRepo.getCommentByVideoId(id);
     return combineVideoWithComments(video, comments);
   } catch (error) {
+    console.log("service : Failed to get video with comment");
     throw error;
   }
 };

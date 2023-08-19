@@ -48,6 +48,7 @@ const getVideoById = async (id) => {
     }
     return video;
   } catch (error) {
+    console.log("repo : Failed to get video by title");
     throw error;
   }
 };

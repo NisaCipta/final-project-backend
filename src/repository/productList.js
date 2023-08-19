@@ -6,7 +6,8 @@ const createProduct = async (data) => {
     const saveProduct = await productModel.create(data);
     return saveProduct;
   } catch (error) {
-    throw new Error("Failed to create product");
+    console.log("Failed to create product");
+    throw error;
   }
 };
 
@@ -16,7 +17,8 @@ const getAllProduct = async () => {
     const products = productModel.find();
     return products;
   } catch (error) {
-    throw new Error("Failed to get all product");
+    console.log("Failed to get all product");
+    throw error;
   }
 };
 
@@ -25,7 +27,8 @@ const getProductById = async (id) => {
   try {
     return await productModel.findById(id);
   } catch (error) {
-    throw new Error("Failed to get product by id");
+    console.log("Failed to get product by id");
+    throw error;
   }
 };
 
@@ -34,6 +37,7 @@ const getProductByVideoID = async (id) => {
     const products = await productModel.find({ video_id: id });
     return products;
   } catch (error) {
+    console.log("Failed to get product by video id");
     throw error;
   }
 };
