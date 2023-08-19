@@ -5,8 +5,8 @@
 This project is a clone form of Tokopedia Play but the videos displayed are from YouTube embeds. Before running the application Users are required to log in via the email they registered at registration. After logging in the user can see the home view of the application. Users can also watch the videos they choose, view their products and write comments on the videos they choose.
 
 ## Deployment
-- BE Base URL : https://final-project-backend-production-ca42.up.railway.app
-- FE Base URL : 
+- BE Base URL : https://final-project-backend-production-be6f.up.railway.app/
+- FE Base URL : https://delicate-dolphin-6388bc.netlify.app/
 
 
 ## Table of Content
